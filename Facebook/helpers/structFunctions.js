@@ -14,8 +14,7 @@
  */
 
 /**
- * @fileoverview Utilities for converting between JSON and goog.protobuf.Struct
- * proto.
+ * Ayuda a interpretar el coustond payload que nos envia Dialogflow
  */
 
 'use strict';

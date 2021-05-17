@@ -4,7 +4,7 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-// for parsing json
+// for parsing json - son los Middleware
 app.use(
   bodyParser.json({
     limit: "20mb",
