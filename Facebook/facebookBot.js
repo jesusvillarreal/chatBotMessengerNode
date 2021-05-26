@@ -154,7 +154,7 @@ async function handleDialogFlowAction(
 ) {
   // Esto se ejecuta cuando "active and parameters" dentro del intent. Se coloca un case
   switch (action) {
-    case "Code.menuCarrusel.action":
+    case "prueba.menuCarrusel.action":
       // Simularemos una base de datos, donde puedan tomar los datos
       let helados = [
         {
@@ -210,33 +210,22 @@ async function handleDialogFlowAction(
       break;
 
     case "Prueba.respuestaRapida.action":
-      let replies = [];
-      for (let i = 0; i <= 4; i++) {
-        replies.push({
+      sendQuickReply(sender, "Ejemplo de Respuesta rápida", [
+        {
           content_type: "text",
-          title: i,
+          title: "Si, lo quiero",
           payload: "menu",
           image_url:
             " https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/600px-Light_green_check.svg.png",
-        });
-      }
-      sendQuickReply(sender, "Ejemplo de Respuesta rápida", replies);
-      // sendQuickReply(sender, "Ejemplo de Respuesta rápida", [
-      //   {
-      //     content_type: "text",
-      //     title: "Si, lo quiero",
-      //     payload: "menu",
-      //     image_url:
-      //       " https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/600px-Light_green_check.svg.png",
-      //   },
-      //   {
-      //     payload: "prueba",
-      //     title: "No, por el momento",
-      //     content_type: "text",
-      //     image_url:
-      //       "https://cdn.pixabay.com/photo/2016/03/31/18/31/cancel-1294426_960_720.png",
-      //   },
-      // ]);
+        },
+        {
+          payload: "prueba",
+          title: "No, por el momento",
+          content_type: "text",
+          image_url:
+            "https://cdn.pixabay.com/photo/2016/03/31/18/31/cancel-1294426_960_720.png",
+        },
+      ]);
       break;
     case "Ubicacion.action":
       sendTextMessage(sender, "Prueba de Texto usando activadores"); // Mensaje desde codigo
