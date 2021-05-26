@@ -154,6 +154,61 @@ async function handleDialogFlowAction(
 ) {
   // Esto se ejecuta cuando "active and parameters" dentro del intent. Se coloca un case
   switch (action) {
+    case "Code.menuCarrusel.action":
+      // Simularemos una base de datos, donde puedan tomar los datos
+      let helados = [
+        {
+          id: 1,
+          nombre: "Helado de fresa",
+          img: "https://www.recetasderechupete.com/wp-content/uploads/2019/07/shutterstock_1010248351.jpg",
+          description: "El helado de fresa esta elaborado con ....",
+          price: 7,
+        },
+        {
+          id: 2,
+          nombre: "Helado de Vainilla",
+          img: "https://www.gourmet.cl/wp-content/uploads/2016/09/Helado_Vainilla-web.jpg",
+          description: "Los helados de vainilla son los más ricos 😁",
+          price: 10,
+        },
+        {
+          id: 3,
+          nombre: "Helado de Cholocolate",
+          img: "https://recetastips.com/wp-content/uploads/2020/05/helado-de-chocolate-6-1.jpg",
+          description: "Choco Choco ",
+          price: 4,
+        },
+      ];
+
+      let tarjetas = [];
+
+      // Se recorre cada objetos de la base de datos "helados"
+      helados.forEach((helado) => {
+        //Inserta datos(objetos) a la variable tarjetas
+        tarjetas.push(
+          {
+            title: helado.nombre,
+            image_url: helado.img,
+            subtitle: helado.description,
+            buttons: [
+              {
+                type: "postback",
+                payload: "hacer_compra",
+                title: "Hace Compra",
+              },
+              {
+                type: "postback",
+                title: "Ver más helados",
+                payload: "ver_mas_helados",
+              },
+            ],
+          } //Termina
+        );
+      });
+      sendGenericMessage(sender, tarjetas);
+
+      break;
+
     case "Prueba.respuestaRapida.action":
       let replies = [];
       for (let i = 0; i <= 4; i++) {
