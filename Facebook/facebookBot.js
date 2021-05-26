@@ -154,6 +154,23 @@ async function handleDialogFlowAction(
 ) {
   // Esto se ejecuta cuando "active and parameters" dentro del intent. Se coloca un case
   switch (action) {
+    case "prueba.masElementos.action":
+      // Se enviara una imagen y un botón.
+      // Await => Esta función retorna una promesa, hace que se ejecute cuando el anterior se halla ejecutado
+      await sendTextMessage(sender, "Envio de una imagen y un botón");
+      await sendImageMessage(
+        sender,
+        "https://i.pinimg.com/originals/29/f6/21/29f621176f8e8348410b92bf266b6488.jpg"
+      );
+      await sendButtonMessage(sender, "Texto en card", [
+        {
+          type: "web_url",
+          url: "https://www.google.com",
+          title: "Boton prueba",
+        },
+      ]);
+      break;
+
     case "prueba.menuCarrusel.action":
       // Simularemos una base de datos, donde puedan tomar los datos
       let helados = [
