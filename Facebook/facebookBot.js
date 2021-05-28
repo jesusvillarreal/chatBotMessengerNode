@@ -126,14 +126,16 @@ async function receivedMessage(event) {
   }
 }
 
-function saveUserData(facebookId) {
+async function saveUserData(facebookId) {
+  let userData = await getUserData(facebookId);
+
   // Tiene que ser en minuscula porque ya se creo un modelo con ese nombre
   //Aqui se creara un objeto que se guardara en la colección
   let chatbotUser = new ChatbotUser({
-    firstName: "",
-    lastName: "",
+    firstName: userData.first_name,
+    lastName: userData.last_name,
     facebookId,
-    profilePic: "",
+    profilePic: userData.profile_pic,
   });
   chatbotUser.save((err, res) => {
     if (err) return console.log(err);
