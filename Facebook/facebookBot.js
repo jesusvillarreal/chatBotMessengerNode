@@ -115,7 +115,7 @@ async function receivedMessage(event) {
     return;
   }
 
-  saveUserData(senderId);
+  saveUserData(facebookId);
 
   if (messageText) {
     //send message to dialogflow
