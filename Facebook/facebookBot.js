@@ -9,7 +9,7 @@ const config = require("../config");
 const dialogflow = require("../dialogflow");
 const { structProtoToJson } = require("./helpers/structFunctions");
 // mongodb models
-const ChatBotUser = require("../Models/ChatbotUsers");
+const ChatbotUser = require("../Models/ChatbotUsers");
 // ChatBotUser.find({}, (err, res) => {
 //   console.log(res, err);
 // });
@@ -115,7 +115,7 @@ async function receivedMessage(event) {
     return;
   }
 
-  saveUserData(facebookId);
+  saveUserData(senderId);
 
   if (messageText) {
     //send message to dialogflow
@@ -129,7 +129,7 @@ async function receivedMessage(event) {
 function saveUserData(facebookId) {
   // Tiene que ser en minuscula porque ya se creo un modelo con ese nombre
   //Aqui se creara un objeto que se guardara en la colección
-  let chatbotUser = new ChatBotUser({
+  let chatbotUser = new ChatbotUser({
     firstName: "",
     lastName: "",
     facebookId,
