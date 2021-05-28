@@ -8,6 +8,11 @@ const axios = require("axios");
 const config = require("../config");
 const dialogflow = require("../dialogflow");
 const { structProtoToJson } = require("./helpers/structFunctions");
+// mongodb models
+const ChatBotUser = require("../Models/ChatbotUsers");
+// ChatBotUser.find({}, (err, res) => {
+//   console.log(res, err);
+// });
 
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -79,6 +84,7 @@ router.post("/webhook/", function (req, res) {
   }
 });
 
+// Recibe el mensaje del usuario
 async function receivedMessage(event) {
   var senderId = event.sender.id;
   var recipientID = event.recipient.id;
@@ -108,6 +114,9 @@ async function receivedMessage(event) {
     handleQuickReply(senderId, quickReply, messageId);
     return;
   }
+
+  saveUserData(senderId);
+
   if (messageText) {
     //send message to dialogflow
     console.log("MENSAJE DEL USUARIO: ", messageText);
@@ -115,6 +124,21 @@ async function receivedMessage(event) {
   } else if (messageAttachments) {
     handleMessageAttachments(messageAttachments, senderId);
   }
+}
+
+function saveUserData(facebookId) {
+  // Tiene que ser en minuscula porque ya se creo un modelo con ese nombre
+  //Aqui se creara un objeto que se guardara en la colección
+  let chatbotUser = new ChatBotUser({
+    firstName: "",
+    lastName: "",
+    facebookId,
+    profilePic: "",
+  });
+  chatbotUser.save((err, res) => {
+    if (err) return console.log(err);
+    console.log("Se creo un usuario", res);
+  });
 }
 
 function handleMessageAttachments(messageAttachments, senderId) {
